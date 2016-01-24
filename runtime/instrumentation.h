@@ -372,7 +372,18 @@ class Instrumentation {
       LOCKS_EXCLUDED(Locks::thread_list_lock_, Locks::classlinker_classes_lock_,
                      deoptimized_methods_lock_);
 
+<<<<<<< HEAD
   void UpdateInterpreterHandlerTable() EXCLUSIVE_LOCKS_REQUIRED(Locks::mutator_lock_) {
+=======
+  void UpdateInterpreterHandlerTable() REQUIRES(Locks::mutator_lock_) {
+    /*
+     * TUNING: Dalvik's mterp stashes the actual current handler table base in a
+     * tls field.  For Arm, this enables all suspend, debug & tracing checks to be
+     * collapsed into a single conditionally-executed ldw instruction.
+     * Move to Dalvik-style handler-table management for both the goto interpreter and
+     * mterp.
+     */
+>>>>>>> 1452bee... Fast Art interpreter
     interpreter_handler_table_ = IsActive() ? kAlternativeHandlerTable : kMainHandlerTable;
   }
 

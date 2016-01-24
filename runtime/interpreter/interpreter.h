@@ -46,6 +46,11 @@ extern JValue EnterInterpreterFromEntryPoint(Thread* self, const DexFile::CodeIt
     SHARED_LOCKS_REQUIRED(Locks::mutator_lock_);
 
 
+// One-time sanity check.
+void CheckInterpreterAsmConstants();
+
+void InitInterpreterTls(Thread* self);
+
 }  // namespace interpreter
 
 extern "C" void artInterpreterToInterpreterBridge(Thread* self, const DexFile::CodeItem* code_item,

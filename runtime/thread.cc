@@ -73,6 +73,7 @@
 #include "verify_object-inl.h"
 #include "vmap_table.h"
 #include "well_known_classes.h"
+#include "interpreter/interpreter.h"
 
 namespace art {
 
@@ -489,6 +490,7 @@ bool Thread::Init(ThreadList* thread_list, JavaVMExt* java_vm, JNIEnvExt* jni_en
   RemoveSuspendTrigger();
   InitCardTable();
   InitTid();
+  interpreter::InitInterpreterTls(this);
 
   CHECK_PTHREAD_CALL(pthread_setspecific, (Thread::pthread_key_self_, this), "attach self");
   DCHECK_EQ(Thread::Current(), this);

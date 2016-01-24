@@ -195,6 +195,7 @@ Runtime::Runtime()
       zygote_max_failed_boots_(0) {
   CheckAsmSupportOffsetsAndSizes();
   std::fill(callee_save_methods_, callee_save_methods_ + arraysize(callee_save_methods_), 0u);
+  interpreter::CheckInterpreterAsmConstants();
 }
 
 Runtime::~Runtime() {
